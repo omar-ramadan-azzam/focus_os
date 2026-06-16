@@ -6,7 +6,12 @@ class StrictModeService {
   static const MethodChannel _channel = MethodChannel('strict_mode');
 
   static Future<bool> isPinned() async {
-    return await ScreenPinning.isPinned();
+    try {
+      return await ScreenPinning.isPinned();
+    } catch (e) {
+      print("خطأ في التحقق من التثبيت: $e");
+      return false;
+    }
   }
 
   static Future<void> enableStrictMode() async {
@@ -14,6 +19,7 @@ class StrictModeService {
       await ScreenPinning.pin();
     } catch (e) {
       print("خطأ في التثبيت: $e");
+      rethrow;
     }
   }
 
@@ -22,9 +28,7 @@ class StrictModeService {
       await ScreenPinning.unpin();
     } catch (e) {
       print("خطأ في إلغاء التثبيت: $e");
+      rethrow;
     }
   }
-
-  // تم إزالة الدالة التي تسبب المشكلة (Permission.overlay)
-  // لأنها غير مستخدمة حالياً
 }
