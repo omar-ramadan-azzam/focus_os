@@ -1,5 +1,6 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:flutter/material.dart';
 
 class NotificationService {
   static final _notifications = FlutterLocalNotificationsPlugin();
@@ -24,7 +25,20 @@ class NotificationService {
     await _notifications.show(0, 'حان وقت التركيز', 'ابدأ جلسة تركيز الآن', details);
   }
 
-  static Future<void> scheduleDailyReminder(Time time) async {
+  // تم إصلاح الدالة: استخدام TimeOfDay بدلاً من Time
+  static Future<void> scheduleDailyReminder(TimeOfDay time) async {
+    final now = DateTime.now();
+    final scheduledTime = DateTime(
+      now.year,
+      now.month,
+      now.day,
+      time.hour,
+      time.minute,
+    );
+    final initialDelay = scheduledTime.isAfter(now)
+        ? scheduledTime.difference(now)
+        : scheduledTime.add(Duration(days: 1)).difference(now);
+
     await _notifications.periodicallyShow(
       1,
       'جلسة تركيز يومية',
