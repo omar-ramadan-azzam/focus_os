@@ -3,8 +3,6 @@ import 'package:screen_pinning/screen_pinning.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class StrictModeService {
-  static const MethodChannel _channel = MethodChannel('strict_mode');
-
   static Future<bool> isPinned() async {
     try {
       return await ScreenPinning.isPinned();
@@ -19,7 +17,6 @@ class StrictModeService {
       await ScreenPinning.pin();
     } catch (e) {
       print("خطأ في التثبيت: $e");
-      rethrow;
     }
   }
 
@@ -28,7 +25,6 @@ class StrictModeService {
       await ScreenPinning.unpin();
     } catch (e) {
       print("خطأ في إلغاء التثبيت: $e");
-      rethrow;
     }
   }
 }
