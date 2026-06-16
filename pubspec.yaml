@@ -21,7 +21,7 @@ dependencies:
   connectivity_plus: ^5.0.2
   flutter_foreground_task: ^8.4.0
   screen_pinning: ^1.0.0
-  add_2_calendar: ^3.0.1
+  add_2_calendar: ^3.0.0
   device_apps: ^2.2.0
 
 dev_dependencies:
