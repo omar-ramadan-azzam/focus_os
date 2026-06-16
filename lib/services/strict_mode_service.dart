@@ -25,7 +25,6 @@ class StrictModeService {
     }
   }
 
-  static Future<bool> requestOverlayPermission() async {
-    return await Permission.overlay.request().isGranted;
-  }
+  // تم إزالة الدالة التي تسبب المشكلة (Permission.overlay)
+  // لأنها غير مستخدمة حالياً
 }
